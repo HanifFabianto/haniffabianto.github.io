@@ -205,10 +205,9 @@
       var items = srcs.map(function (src, i) {
         return {
           src: src,
-          caption: (entry.captions && entry.captions[i]) || "Bukti " + (i + 1) + ": " + entry.title
+          caption: (entry.captions && entry.captions[i]) || (srcs.length > 1 ? entry.title + " " + (i + 1) : entry.title)
         };
       });
-      evidence.appendChild(h("p", { class: "evidence-title", text: "Bukti (" + items.length + ")" }));
       var grid = h("div", { class: "thumbs" });
       items.forEach(function (item, i) {
         var img = h("img", { src: item.src, alt: item.caption, loading: "lazy" });
