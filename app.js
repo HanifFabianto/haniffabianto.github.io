@@ -68,6 +68,18 @@
     facts.appendChild(h("div", {}, [h("dt", { text: f.label }), h("dd", { text: f.value })]));
   });
 
+  // Data diri (TTL) dan hobi: panel kedua, dipisah garis tebal dari identitas akademik.
+  var personal = document.getElementById("personal");
+  (p.personal || []).forEach(function (f) {
+    personal.appendChild(h("div", {}, [h("dt", { text: f.label }), h("dd", { text: f.value })]));
+  });
+  if (p.hobbies && p.hobbies.length) {
+    var hobiList = h("ul", { class: "chips" });
+    p.hobbies.forEach(function (t) { hobiList.appendChild(h("li", { text: t })); });
+    personal.appendChild(h("div", {}, [h("dt", { text: "Hobi" }), h("dd", {}, [hobiList])]));
+  }
+  if (!personal.children.length) personal.hidden = true;
+
   if (EDIT) document.getElementById("edit-banner").hidden = false;
 
   // Foto profil: simpan sebagai images/profil/foto.jpg (atau .png / .webp). Tanpa file, bagian ini tidak tampil.
@@ -157,7 +169,7 @@
     var body = h("div", {}, [
       h("h3", { text: entry.title }),
       h("p", { class: "org", text: entry.org }),
-      h("p", { class: "entry-text", text: entry.text })
+      entry.text ? h("p", { class: "entry-text", text: entry.text }) : null
     ]);
 
     if (entry.figure) {
@@ -178,8 +190,9 @@
     var evidence = h("div", { class: "evidence" });
     body.appendChild(evidence);
 
-    findImages(entry.id).then(function (srcs) {
+    (entry.noEvidence ? Promise.resolve([]) : findImages(entry.id)).then(function (srcs) {
       if (!srcs.length) {
+        if (entry.noEvidence) return;
         if (EDIT) {
           var msg = h("div", { class: "empty" });
           msg.appendChild(document.createTextNode("Bukti belum ditambahkan. Simpan gambar sebagai "));
@@ -209,7 +222,7 @@
       evidence.appendChild(grid);
     });
 
-    return h("article", { class: "entry", id: entry.id }, [
+    return h("article", { class: "entry" + (entry.compact ? " compact" : ""), id: entry.id }, [
       h("div", { class: "when", text: entry.when }),
       body
     ]);
