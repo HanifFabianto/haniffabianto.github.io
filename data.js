@@ -141,6 +141,15 @@ window.PORTFOLIO = {
           text: "Sertifikat pemodelan 2D dan 3D menggunakan AutoCAD.",
           tags: [],
           captions: ["Sertifikat AutoCAD"]
+        },
+        {
+          id: "sertifikat-inventor",
+          title: "Autodesk Inventor",
+          org: "Autodesk",
+          when: "",
+          text: "Sertifikat pemodelan 3D dan desain mekanik menggunakan Autodesk Inventor.",
+          tags: [],
+          captions: ["Sertifikat Inventor"]
         }
       ]
     },
