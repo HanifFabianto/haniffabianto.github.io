@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Editor Portofolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&display=swap">
+<style>
+:root{--ink:#2A2C31;--muted:#4F5152;--paper:#EAE6DF;--surface:#F7F6F2;--line:#C2BEB8;--halo:#CCC956;--accent:#8A3B34;--olive:#626257}
+@media (prefers-color-scheme:dark){:root{--ink:#EAE6DF;--muted:#B9B5AE;--paper:#1F2124;--surface:#2A2C31;--line:#4A4D50;--accent:#E0877E;--olive:#AEA6A0}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 Barlow,system-ui,sans-serif;background:var(--paper);color:var(--ink)}
+header{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line);padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+header h1{font-size:1.1rem;margin:0;flex:1 1 200px}
+#status{font-size:.9rem;color:var(--muted)}
+main{max-width:1100px;margin:0 auto;padding:16px;display:grid;gap:16px;grid-template-columns:minmax(0,1fr)}
+@media(min-width:900px){main{grid-template-columns:minmax(0,420px) minmax(0,1fr);align-items:start}}
+section{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px}
+h2{font-size:1.05rem;margin:0 0 12px}
+h3{font-size:.95rem;margin:16px 0 6px;color:var(--olive)}
+label{display:block;font-weight:600;font-size:.9rem;margin:10px 0 3px}
+input,select,textarea{width:100%;font:inherit;color:inherit;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px}
+textarea{min-height:90px;resize:vertical}
+button{font:inherit;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:6px;padding:6px 12px}
+button.primary{background:var(--halo);color:#2A2C31;border-color:#2A2C31;font-weight:600}
+button.danger{color:var(--accent)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--halo);outline-offset:1px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.hint{font-size:.85rem;color:var(--muted);margin:3px 0 0}
+.item{display:flex;gap:8px;align-items:center;justify-content:space-between;padding:8px 0;border-top:1px solid var(--line)}
+.item small{color:var(--muted);display:block}
+.item .btns{display:flex;gap:4px;flex-shrink:0}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{background:var(--paper);border:1px solid var(--line);border-radius:99px;padding:2px 4px 2px 10px;font-size:.9rem}
+.chip button{border:0;background:none;padding:0 6px;color:var(--accent)}
+.new{color:var(--accent);font-size:.8rem;font-weight:600}
+#editnote{background:var(--paper);border-left:4px solid var(--halo);padding:6px 10px;margin-bottom:8px;display:none}
+</style>
+</head>
+<body>
+<header>
+  <h1>Editor Portofolio</h1>
+  <span id="status" aria-live="polite">Belum ada perubahan.</span>
+  <button class="primary" id="dl-all">Unduh pembaruan (.zip)</button>
+  <button id="dl-data">Unduh data.js saja</button>
+</header>
+
+<main>
+  <section aria-labelledby="f-h">
+    <h2 id="f-h">Tambah poin</h2>
+    <div id="editnote"></div>
+    <label for="f-sec">Bagian</label>
+    <select id="f-sec"></select>
+    <div id="newsec" hidden>
+      <label for="f-newsec">Nama bagian baru</label>
+      <input id="f-newsec" placeholder="Contoh: Penghargaan">
+    </div>
+    <label for="f-title">Judul</label>
+    <input id="f-title" placeholder="Contoh: Juara 2 Lomba Data Mining">
+    <label for="f-org">Instansi atau konteks</label>
+    <input id="f-org" placeholder="Contoh: Universitas Muhammadiyah Malang">
+    <label for="f-when">Waktu</label>
+    <input id="f-when" placeholder="Contoh: 2026">
+    <label for="f-text">Deskripsi</label>
+    <textarea id="f-text"></textarea>
+    <label for="f-tags">Tag (pisahkan dengan koma, boleh kosong)</label>
+    <input id="f-tags" placeholder="Python, EDA">
+    <label for="f-img">Gambar bukti (boleh banyak, boleh kosong)</label>
+    <input id="f-img" type="file" accept="image/*" multiple>
+    <p class="hint">Gambar otomatis dikecilkan (maks. 1600 px) dan diberi nama berurutan.</p>
+    <div class="row" style="margin-top:14px">
+      <button class="primary" id="f-save">Tambahkan</button>
+      <button id="f-cancel" hidden>Batal ubah</button>
+    </div>
+
+    <h3>Tambah keahlian</h3>
+    <label for="s-group">Kelompok</label>
+    <select id="s-group"></select>
+    <label for="s-item">Keahlian baru</label>
+    <div class="row"><input id="s-item" style="flex:1" placeholder="Contoh: Power BI"><button id="s-add">Tambah</button></div>
+  </section>
+
+  <section aria-labelledby="l-h">
+    <h2 id="l-h">Isi portofolio saat ini</h2>
+    <div id="list"></div>
+    <p class="hint">Setelah selesai, klik <b>Unduh pembaruan</b>, ekstrak, lalu unggah <code>data.js</code> dan folder <code>images</code> ke GitHub (lihat README bagian 2b).</p>
+  </section>
+</main>
+
+<script src="data.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(JSON.stringify(window.PORTFOLIO));
+  var EXTS = ["jpg", "jpeg", "png", "webp", "JPG", "JPEG", "PNG"];
+  var pending = {};   // id -> [{n, blob}]
+  var newIds = {};    // id -> true (entri baru, belum ada di situs)
+  var dirty = 0, editing = null;
+  var $ = function (id) { return document.getElementById(id); };
+
+  function slug(s) {
+    return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "poin";
+  }
+  function allIds() {
+    var ids = {};
+    D.sections.forEach(function (s) { (s.entries || []).forEach(function (e) { ids[e.id] = 1; }); ids[s.id] = 1; });
+    return ids;
+  }
+  function uniqueId(base) {
+    var ids = allIds(), id = base, n = 2;
+    while (ids[id]) id = base + "-" + n++;
+    return id;
+  }
+  function mark(msg) {
+    dirty++;
+    $("status").textContent = msg + " (" + dirty + " perubahan belum diunduh)";
+  }
+  window.addEventListener("beforeunload", function (e) {
+    if (dirty) { e.preventDefault(); e.returnValue = ""; }
+  });
+
+  function probe(src) {
+    return new Promise(function (r) {
+      var i = new Image(); i.onload = function () { r(true); }; i.onerror = function () { r(false); }; i.src = src;
+    });
+  }
+  async function existingCount(id) {
+    if (newIds[id]) return 0;
+    for (var n = 1; n <= 12; n++) {
+      var ok = (await Promise.all(EXTS.map(function (e) { return probe("images/" + id + "/" + n + "." + e); }))).some(Boolean);
+      if (!ok) return n - 1;
+    }
+    return 12;
+  }
+  async function compress(file) {
+    var bmp = await createImageBitmap(file);
+    var k = Math.min(1, 1600 / Math.max(bmp.width, bmp.height));
+    var c = document.createElement("canvas");
+    c.width = Math.round(bmp.width * k); c.height = Math.round(bmp.height * k);
+    var x = c.getContext("2d");
+    x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
+    x.drawImage(bmp, 0, 0, c.width, c.height);
+    return new Promise(function (r) { c.toBlob(r, "image/jpeg", 0.85); });
+  }
+  async function addImages(id, files) {
+    if (!files.length) return 0;
+    var start = (await existingCount(id)) + (pending[id] ? pending[id].length : 0);
+    pending[id] = pending[id] || [];
+    for (var i = 0; i < files.length; i++) {
+      var n = start + i + 1;
+      if (n > 12) { alert("Maksimal 12 gambar per poin. Sisanya dilewati."); break; }
+      pending[id].push({ n: n, blob: await compress(files[i]) });
+    }
+    return files.length;
+  }
+
+  /* ---------- tampilan ---------- */
+  function secOptions() {
+    var sel = $("f-sec"), keep = sel.value;
+    sel.innerHTML = "";
+    D.sections.filter(function (s) { return s.type !== "skills"; }).forEach(function (s) {
+      var o = document.createElement("option"); o.value = s.id; o.textContent = s.title; sel.appendChild(o);
+    });
+    var o = document.createElement("option"); o.value = "__new"; o.textContent = "+ Bagian baru..."; sel.appendChild(o);
+    if (keep) sel.value = keep;
+    $("newsec").hidden = sel.value !== "__new";
+    var g = $("s-group"); g.innerHTML = "";
+    var sk = D.sections.filter(function (s) { return s.type === "skills"; })[0];
+    if (sk) sk.groups.forEach(function (gr, i) {
+      var op = document.createElement("option"); op.value = i; op.textContent = gr.name; g.appendChild(op);
+    });
+  }
+  function btn(text, fn, cls) {
+    var b = document.createElement("button"); b.type = "button"; b.textContent = text;
+    if (cls) b.className = cls; b.addEventListener("click", fn); return b;
+  }
+  function render() {
+    var list = $("list"); list.innerHTML = "";
+    D.sections.forEach(function (sec) {
+      var h = document.createElement("h3"); h.textContent = sec.title; list.appendChild(h);
+      if (sec.type === "skills") {
+        sec.groups.forEach(function (g, gi) {
+          var d = document.createElement("div"); d.innerHTML = "<small></small>"; d.firstChild.textContent = g.name;
+          var chips = document.createElement("div"); chips.className = "chips";
+          g.items.forEach(function (it, ii) {
+            var c = document.createElement("span"); c.className = "chip"; c.textContent = it;
+            c.appendChild(btn("×", function () { g.items.splice(ii, 1); mark("Keahlian dihapus"); render(); }));
+            c.lastChild.setAttribute("aria-label", "Hapus " + it);
+            chips.appendChild(c);
+          });
+          d.appendChild(chips); list.appendChild(d);
+        });
+        return;
+      }
+      sec.entries.forEach(function (e, i) {
+        var row = document.createElement("div"); row.className = "item";
+        var t = document.createElement("div");
+        var b = document.createElement("b"); b.textContent = e.title;
+        var s = document.createElement("small"); s.textContent = e.org + " · " + e.when;
+        t.appendChild(b);
+        if (newIds[e.id]) { var nw = document.createElement("span"); nw.className = "new"; nw.textContent = " BARU"; t.appendChild(nw); }
+        t.appendChild(s);
+        var n = pending[e.id] ? pending[e.id].length : 0;
+        if (n) { var im = document.createElement("small"); im.textContent = n + " gambar baru"; t.appendChild(im); }
+        var bs = document.createElement("div"); bs.className = "btns";
+        bs.appendChild(btn("↑", function () { move(sec, i, -1); })); bs.lastChild.setAttribute("aria-label", "Naikkan");
+        bs.appendChild(btn("↓", function () { move(sec, i, 1); })); bs.lastChild.setAttribute("aria-label", "Turunkan");
+        bs.appendChild(btn("Ubah", function () { startEdit(sec, e); }));
+        bs.appendChild(btn("Hapus", function () {
+          if (!confirm("Hapus \"" + e.title + "\"? Folder gambarnya di GitHub tidak ikut terhapus.")) return;
+          sec.entries.splice(i, 1); delete pending[e.id]; mark("Poin dihapus"); render();
+        }, "danger"));
+        row.appendChild(t); row.appendChild(bs); list.appendChild(row);
+      });
+    });
+  }
+  function move(sec, i, d) {
+    var j = i + d; if (j < 0 || j >= sec.entries.length) return;
+    var t = sec.entries[i]; sec.entries[i] = sec.entries[j]; sec.entries[j] = t;
+    mark("Urutan diubah"); render();
+  }
+
+  /* ---------- form ---------- */
+  function resetForm() {
+    editing = null;
+    ["f-title", "f-org", "f-when", "f-text", "f-tags", "f-newsec"].forEach(function (k) { $(k).value = ""; });
+    $("f-img").value = ""; $("f-save").textContent = "Tambahkan";
+    $("f-cancel").hidden = true; $("editnote").style.display = "none"; $("f-sec").disabled = false;
+  }
+  function startEdit(sec, e) {
+    editing = { sec: sec, e: e };
+    $("f-sec").value = sec.id; $("f-sec").disabled = true; $("newsec").hidden = true;
+    $("f-title").value = e.title; $("f-org").value = e.org; $("f-when").value = e.when;
+    $("f-text").value = e.text; $("f-tags").value = (e.tags || []).join(", ");
+    $("f-save").textContent = "Simpan perubahan"; $("f-cancel").hidden = false;
+    $("editnote").style.display = "block"; $("editnote").textContent = "Mengubah: " + e.title;
+    window.scrollTo({ top: 0, behavior: "smooth" }); $("f-title").focus();
+  }
+  $("f-sec").addEventListener("change", function () { $("newsec").hidden = this.value !== "__new"; });
+  $("f-cancel").addEventListener("click", resetForm);
+
+  $("f-save").addEventListener("click", async function () {
+    var title = $("f-title").value.trim();
+    if (!title) { alert("Judul wajib diisi."); $("f-title").focus(); return; }
+    var tags = $("f-tags").value.split(",").map(function (t) { return t.trim(); }).filter(Boolean);
+    var vals = { title: title, org: $("f-org").value.trim(), when: $("f-when").value.trim(), text: $("f-text").value.trim(), tags: tags };
+    var files = Array.prototype.slice.call($("f-img").files);
+    this.disabled = true;
+    try {
+      var entry;
+      if (editing) {
+        entry = editing.e; Object.keys(vals).forEach(function (k) { entry[k] = vals[k]; });
+      } else {
+        var sec;
+        if ($("f-sec").value === "__new") {
+          var nm = $("f-newsec").value.trim();
+          if (!nm) { alert("Isi nama bagian baru."); return; }
+          sec = { id: uniqueId(slug(nm)), title: nm, entries: [] };
+          var si = D.sections.findIndex(function (s) { return s.type === "skills"; });
+          if (si < 0) D.sections.push(sec); else D.sections.splice(si, 0, sec);
+          secOptions(); $("f-sec").value = sec.id;
+        } else {
+          sec = D.sections.filter(function (s) { return s.id === $("f-sec").value; })[0];
+        }
+        entry = Object.assign({ id: uniqueId(slug(title)) }, vals, { captions: [] });
+        sec.entries.unshift(entry); newIds[entry.id] = true;
+      }
+      var n = await addImages(entry.id, files);
+      mark((editing ? "Poin diubah" : "Poin ditambahkan") + (n ? ", " + n + " gambar" : ""));
+      resetForm(); render();
+    } finally { this.disabled = false; }
+  });
+
+  $("s-add").addEventListener("click", function () {
+    var v = $("s-item").value.trim(); if (!v) return;
+    var sk = D.sections.filter(function (s) { return s.type === "skills"; })[0];
+    if (!sk) return;
+    sk.groups[+$("s-group").value].items.push(v);
+    $("s-item").value = ""; mark("Keahlian ditambahkan"); render();
+  });
+
+  /* ---------- unduh ---------- */
+  function dataJs() {
+    return "/*\n  DATA PORTOFOLIO\n  Diperbarui lewat admin.html. Gambar bukti: images/<id>/1.jpg, 2.jpg, ...\n  Keterangan gambar (opsional) lewat \"captions\".\n*/\nwindow.PORTFOLIO = " +
+      JSON.stringify(D, null, 2) + ";\n";
+  }
+  function save(blob, name) {
+    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
+  }
+  $("dl-data").addEventListener("click", function () {
+    save(new Blob([dataJs()], { type: "text/javascript" }), "data.js"); dirty = 0;
+    $("status").textContent = "data.js diunduh.";
+  });
+  $("dl-all").addEventListener("click", async function () {
+    if (typeof JSZip === "undefined") { alert("Pustaka zip gagal dimuat (cek internet). Mengunduh data.js saja."); $("dl-data").click(); return; }
+    var z = new JSZip(); z.file("data.js", dataJs());
+    Object.keys(pending).forEach(function (id) {
+      pending[id].forEach(function (p) { z.file("images/" + id + "/" + p.n + ".jpg", p.blob); });
+    });
+    save(await z.generateAsync({ type: "blob" }), "pembaruan-portofolio.zip"); dirty = 0;
+    $("status").textContent = "Paket pembaruan diunduh.";
+  });
+
+  secOptions(); render();
+})();
+</script>
+</body>
+</html>
