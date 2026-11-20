@@ -101,7 +101,7 @@
     document.getElementById("portrait").hidden = false;
   });
 
-  /* ---------- penampil bukti ---------- */
+  /* ---------- penampil gambar ---------- */
   var dlg = document.getElementById("lightbox");
   var lbImg = document.getElementById("lb-img");
   var lbCap = document.getElementById("lb-cap");
@@ -195,7 +195,7 @@
         if (entry.noEvidence) return;
         if (EDIT) {
           var msg = h("div", { class: "empty" });
-          msg.appendChild(document.createTextNode("Bukti belum ditambahkan. Simpan gambar sebagai "));
+          msg.appendChild(document.createTextNode("Foto belum ditambahkan. Simpan gambar sebagai "));
           msg.appendChild(h("code", { text: "images/" + entry.id + "/1.jpg" }));
           msg.appendChild(document.createTextNode(" (lalu 2.jpg, 3.jpg, dan seterusnya)."));
           evidence.appendChild(msg);

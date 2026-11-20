@@ -66,7 +66,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
     <textarea id="f-text"></textarea>
     <label for="f-tags">Tag (pisahkan dengan koma, boleh kosong)</label>
     <input id="f-tags" placeholder="Python, EDA">
-    <label for="f-img">Gambar bukti (boleh banyak, boleh kosong)</label>
+    <label for="f-img">Foto pendukung (boleh banyak, boleh kosong)</label>
     <input id="f-img" type="file" accept="image/*" multiple>
     <p class="hint">Gambar otomatis dikecilkan (maks. 1600 px) dan diberi nama berurutan.</p>
     <div class="row" style="margin-top:14px">
@@ -284,7 +284,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 
   /* ---------- unduh ---------- */
   function dataJs() {
-    return "/*\n  DATA PORTOFOLIO\n  Diperbarui lewat admin.html. Gambar bukti: images/<id>/1.jpg, 2.jpg, ...\n  Keterangan gambar (opsional) lewat \"captions\".\n*/\nwindow.PORTFOLIO = " +
+    return "/*\n  DATA PORTOFOLIO\n  Diperbarui lewat admin.html. Foto: images/<id>/1.jpg, 2.jpg, ...\n  Keterangan gambar (opsional) lewat \"captions\".\n*/\nwindow.PORTFOLIO = " +
       JSON.stringify(D, null, 2) + ";\n";
   }
   function save(blob, name) {

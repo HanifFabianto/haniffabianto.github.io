@@ -12,7 +12,7 @@ Situs statis (HTML, CSS, JavaScript biasa). Tanpa build, tanpa server, tanpa bia
 
 Alternatif gratis lain: Netlify Drop (seret folder ke netlify.com/drop) atau Cloudflare Pages.
 
-## 2. Menambah gambar bukti
+## 2. Menambah gambar foto
 
 Setiap poin punya folder sendiri di `images/`. Cukup simpan gambar dengan nama berurutan:
 
@@ -34,6 +34,7 @@ Tidak perlu mengubah kode. Gambar muncul otomatis sebagai thumbnail yang bisa di
 | Maintenance Intern PT Pralon | `images/pralon-maintenance/` |
 | Sertifikat Data Analysis (MySkill) | `images/sertifikat-data-analysis/` |
 | Sertifikat AutoCAD (Autodesk) | `images/sertifikat-autocad/` |
+| Sertifikat Inventor | `images/sertifikat-inventor/` |
 | Jamaah AR Fachruddin | `images/jamaah-arf/` |
 | Panitia Milad ke-114 | `images/panitia-milad/` |
 | Pendidikan | `images/kuliah-umm/` |
@@ -50,7 +51,7 @@ Untuk melihat folder mana yang masih kosong, buka situs dengan tambahan `?edit`,
 
 Tanpa menyentuh kode. Buka `https://haniffabianto.github.io/admin.html` (atau klik dua kali `admin.html` di komputer):
 
-1. Isi form **Tambah poin**: pilih bagian (atau buat bagian baru), isi judul, instansi, waktu, deskripsi, tag, dan pilih gambar bukti jika ada. Klik **Tambahkan**.
+1. Isi form **Tambah poin**: pilih bagian (atau buat bagian baru), isi judul, instansi, waktu, deskripsi, tag, dan pilih gambar foto jika ada. Klik **Tambahkan**.
 2. Di kolom kanan Anda bisa mengubah, menghapus, dan mengurutkan poin. Keahlian baru ditambah lewat kotak **Tambah keahlian**.
 3. Klik **Unduh pembaruan (.zip)**, lalu ekstrak.
 4. Di repo GitHub, **Add file > Upload files**, seret `data.js` dan folder `images` hasil ekstrak, lalu **Commit changes**. File lama otomatis tertimpa. Situs diperbarui dalam 1 sampai 2 menit.
@@ -63,7 +64,7 @@ Semua teks ada di `data.js`. Edit langsung di GitHub (ikon pensil), lalu commit.
 
 ## 4. Catatan privasi
 
-Situs ini publik. Sebelum mengunggah bukti, pastikan tidak ada data sensitif: nama atau data pribadi karyawan, dokumen internal perusahaan (misalnya data analisis beban kerja PT Pralon), nomor identitas, atau nomor sertifikat yang tidak ingin dibagikan. Blur bagian itu atau minta izin terlebih dahulu. Nomor WhatsApp pada `data.js` juga bisa dihapus jika tidak ingin ditampilkan.
+Situs ini publik. Sebelum mengunggah foto, pastikan tidak ada data sensitif: nama atau data pribadi karyawan, dokumen internal perusahaan (misalnya data analisis beban kerja PT Pralon), nomor identitas, atau nomor sertifikat yang tidak ingin dibagikan. Blur bagian itu atau minta izin terlebih dahulu. Nomor WhatsApp pada `data.js` juga bisa dihapus jika tidak ingin ditampilkan.
 
 ## 5. Warna dan animasi
 

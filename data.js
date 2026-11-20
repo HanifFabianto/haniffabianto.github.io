@@ -1,7 +1,7 @@
 /*
   DATA PORTOFOLIO
   ----------------
-  Ubah teks di sini. Gambar bukti TIDAK perlu didaftarkan di sini:
+  Ubah teks di sini. Foto TIDAK perlu didaftarkan di sini:
   cukup simpan sebagai  images/<id>/1.jpg, 2.jpg, 3.jpg ...  (urut tanpa lompat).
   Ekstensi yang dikenali: jpg, jpeg, png, webp.
   Keterangan gambar (opsional) diisi lewat "captions", urut sesuai nomor gambar.
