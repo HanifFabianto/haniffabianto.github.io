@@ -46,6 +46,17 @@ Aturan:
 
 Untuk melihat folder mana yang masih kosong, buka situs dengan tambahan `?edit`, contoh `https://haniffabianto.github.io/?edit`. Pengunjung biasa tidak melihat kotak kosong itu.
 
+## 2b. Menambah poin baru kapan saja (editor admin.html)
+
+Tanpa menyentuh kode. Buka `https://haniffabianto.github.io/admin.html` (atau klik dua kali `admin.html` di komputer):
+
+1. Isi form **Tambah poin**: pilih bagian (atau buat bagian baru), isi judul, instansi, waktu, deskripsi, tag, dan pilih gambar bukti jika ada. Klik **Tambahkan**.
+2. Di kolom kanan Anda bisa mengubah, menghapus, dan mengurutkan poin. Keahlian baru ditambah lewat kotak **Tambah keahlian**.
+3. Klik **Unduh pembaruan (.zip)**, lalu ekstrak.
+4. Di repo GitHub, **Add file > Upload files**, seret `data.js` dan folder `images` hasil ekstrak, lalu **Commit changes**. File lama otomatis tertimpa. Situs diperbarui dalam 1 sampai 2 menit.
+
+Catatan: halaman admin hanya menyusun file di browser Anda. Tidak ada yang tersimpan sampai Anda mengunggahnya ke GitHub, jadi aman walau alamatnya publik. Gambar otomatis dikecilkan dan diberi nama berurutan.
+
 ## 3. Mengubah teks
 
 Semua teks ada di `data.js`. Edit langsung di GitHub (ikon pensil), lalu commit.
