@@ -148,7 +148,7 @@ main {
 /* ---------- Kepala lembar (title block) ---------- */
 .sheet {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 1fr) 370px;
   border: 2px solid var(--ink);
   background: var(--surface);
 }
@@ -206,9 +206,9 @@ main {
 .portrait[hidden] { display: none; }
 .portrait img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
-  object-position: center top;
+  object-position: center 15%;
 }
 .empty-portrait {
   padding: 1.25rem 1.1rem;
@@ -225,18 +225,50 @@ main {
   background: var(--slate);
   color: var(--surface);
 }
+/* Label di kiri, isi di kanan: satu baris per fakta */
 .sheet-facts > div {
-  padding: 0.9rem 1.1rem;
+  display: grid;
+  grid-template-columns: 5.6rem minmax(0, 1fr);
+  column-gap: 0.6rem;
+  align-items: baseline;
+  padding: 0.85rem 1.1rem;
   border-bottom: 1.5px solid var(--olive);
   flex: 1;
 }
 .sheet-facts > div:last-child { border-bottom: 0; }
 .sheet-facts dt {
-  font-size: 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--halo);
-  margin-bottom: 0.15rem;
 }
-.sheet-facts dd { margin: 0; font-weight: 600; line-height: 1.3; }
+.sheet-facts dd { margin: 0; font-weight: 600; font-size: 1rem; line-height: 1.3; }
+
+/* Data diri: panel lebih gelap agar terbaca sebagai kelompok kedua */
+.sheet-side .sheet-personal { flex: 0 0 auto; }
+.sheet-personal {
+  background: var(--ink);
+  border-top: 2px solid var(--ink);
+}
+.sheet-personal[hidden] { display: none; }
+.sheet-personal > div { flex: 0 0 auto; }
+.sheet-personal dd { font-weight: 500; }
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.chips li {
+  border: 1.5px solid var(--stone);
+  padding: 0.05rem 0.6rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--surface);
+}
 
 /* ---------- Bagian ---------- */
 .block { margin-top: 3.5rem; }
@@ -259,6 +291,10 @@ main {
   border-top: 1px solid var(--line);
 }
 .block > h2 + .entry { border-top: 0; }
+.entry.compact { padding: 1rem 0; }
+.entry.compact h3 { font-size: 1.4rem; }
+.entry.compact .org { margin-bottom: 0; }
+.entry.compact .when { font-size: 1.15rem; }
 
 .when {
   font-family: var(--display);
@@ -472,10 +508,7 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
   .sheet { grid-template-columns: 1fr; }
   .sheet-main { border-right: 0; border-bottom: 2px solid var(--ink); padding: 1.5rem 1.25rem; }
   .portrait img { aspect-ratio: 4 / 3; }
-  .sheet-facts { display: grid; grid-template-columns: 1fr 1fr; }
-  .sheet-facts > div { border-right: 1.5px solid var(--olive); }
-  .sheet-facts > div:nth-child(2n) { border-right: 0; }
-  .sheet-facts > div:nth-last-child(-n + 2) { border-bottom: 0; }
+  .sheet-facts > div { grid-template-columns: 7rem minmax(0, 1fr); padding: 0.75rem 1.25rem; }
 }
 
 @media (max-width: 640px) {
@@ -485,9 +518,7 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
   .entry { grid-template-columns: 1fr; }
   .when { order: -1; margin-bottom: 0.2rem; font-size: 1.1rem; }
   .block > h2 { font-size: 2rem; }
-  .sheet-facts { grid-template-columns: 1fr; }
-  .sheet-facts > div { border-right: 0; border-bottom: 1.5px solid var(--olive) !important; }
-  .sheet-facts > div:last-child { border-bottom: 0 !important; }
+  .sheet-facts > div { grid-template-columns: 5.5rem minmax(0, 1fr); padding: 0.75rem 1rem; column-gap: 0.6rem; }
   .thumbs { grid-template-columns: repeat(2, 1fr); }
 }
 
