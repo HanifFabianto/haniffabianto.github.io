@@ -13,11 +13,15 @@ window.PORTFOLIO = {
     summary:
       "Berpengalaman dalam pengolahan data, analisis statistik, pemodelan prediktif, dan operasi industri melalui proyek akademik, kegiatan laboratorium, dan magang. Menguasai Python, Microsoft Office, dan berbagai metode analitis.",
     facts: [
-      { label: "Program studi", value: "Teknik Industri (S1), 2023 sampai sekarang" },
+      { label: "Prodi", value: "Teknik Industri (S1)" },
       { label: "Universitas", value: "Universitas Muhammadiyah Malang" },
       { label: "Lokasi", value: "Malang, Indonesia" },
       { label: "Fokus", value: "Data Analytics, Machine Learning" }
     ],
+    personal: [
+      { label: "TTL", value: "Pekalongan, 27 April 2004" }
+    ],
+    hobbies: ["Travelling", "Aquascape", "Panahan"],
     cv: "CV-ATS_Hanif_Fabianto.docx",
     contacts: [
       { label: "Email", href: "mailto:haniff274@gmail.com", text: "haniff274@gmail.com" },
@@ -187,6 +191,39 @@ window.PORTFOLIO = {
             "Quality Control",
             "Computer Programming"
           ],
+          captions: []
+        },
+        {
+          id: "sma-ihsanul-fikri",
+          title: "SMA IT Ihsanul Fikri Mungkid",
+          org: "Sekolah Menengah Atas",
+          when: "2020 sampai 2023",
+          text: "",
+          tags: [],
+          compact: true,
+          noEvidence: true,
+          captions: []
+        },
+        {
+          id: "smp-assalam",
+          title: "SMP IT Assalam Boarding School Pekalongan",
+          org: "Sekolah Menengah Pertama",
+          when: "2016 sampai 2019",
+          text: "",
+          tags: [],
+          compact: true,
+          noEvidence: true,
+          captions: []
+        },
+        {
+          id: "sd-sragi",
+          title: "SD Negeri 3 Sragi",
+          org: "Sekolah Dasar",
+          when: "2010 sampai 2016",
+          text: "",
+          tags: [],
+          compact: true,
+          noEvidence: true,
           captions: []
         }
       ]
