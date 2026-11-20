@@ -200,13 +200,13 @@ main {
 .sheet-side {
   display: flex;
   flex-direction: column;
-  background: var(--slate);
+  background: var(--ink);
 }
-.portrait { margin: 0; border-bottom: 2px solid var(--ink); background: var(--ink); }
+.portrait { margin: 0; background: var(--ink); }
 .portrait[hidden] { display: none; }
 .portrait img {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 5;
   object-fit: cover;
   object-position: center 15%;
 }
@@ -217,26 +217,24 @@ main {
   color: var(--halo);
   font-size: 0.9rem;
 }
-.sheet-side .sheet-facts { flex: 1; }
+/* Fakta akademik: turun ke bawah foto, tersusun menyamping (kiri ke kanan) */
 .sheet-facts {
+  grid-column: 1 / -1;
   margin: 0;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   background: var(--slate);
   color: var(--surface);
+  border-top: 2px solid var(--ink);
 }
-/* Label di kiri, isi di kanan: satu baris per fakta */
 .sheet-facts > div {
-  display: grid;
-  grid-template-columns: 5.6rem minmax(0, 1fr);
-  column-gap: 0.6rem;
-  align-items: baseline;
-  padding: 0.85rem 1.1rem;
-  border-bottom: 1.5px solid var(--olive);
-  flex: 1;
+  padding: 1rem 1.25rem;
+  border-right: 1.5px solid var(--olive);
+  min-width: 0;
 }
-.sheet-facts > div:last-child { border-bottom: 0; }
+.sheet-facts > div:last-child { border-right: 0; }
 .sheet-facts dt {
+  margin-bottom: 0.25rem;
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -245,14 +243,13 @@ main {
 }
 .sheet-facts dd { margin: 0; font-weight: 600; font-size: 1rem; line-height: 1.3; }
 
-/* Data diri: panel lebih gelap agar terbaca sebagai kelompok kedua */
-.sheet-side .sheet-personal { flex: 0 0 auto; }
+/* Data diri (TTL dan hobi): baris di bawah fakta akademik, lebih gelap */
 .sheet-personal {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
   background: var(--ink);
-  border-top: 2px solid var(--ink);
+  border-top: 1.5px solid var(--olive);
 }
 .sheet-personal[hidden] { display: none; }
-.sheet-personal > div { flex: 0 0 auto; }
 .sheet-personal dd { font-weight: 500; }
 .chips {
   list-style: none;
@@ -507,8 +504,13 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
 @media (max-width: 860px) {
   .sheet { grid-template-columns: 1fr; }
   .sheet-main { border-right: 0; border-bottom: 2px solid var(--ink); padding: 1.5rem 1.25rem; }
-  .portrait img { aspect-ratio: 4 / 3; }
-  .sheet-facts > div { grid-template-columns: 7rem minmax(0, 1fr); padding: 0.75rem 1.25rem; }
+  .sheet-side { background: var(--ink); }
+  .portrait { width: min(100%, 380px); margin: 0 auto; }
+  .sheet-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .sheet-facts > div:nth-child(2n) { border-right: 0; }
+  .sheet-facts > div:nth-child(n+3) { border-top: 1.5px solid var(--olive); }
+  .sheet-personal { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .sheet-personal > div:nth-child(n+3) { border-top: 0; }
 }
 
 @media (max-width: 640px) {
@@ -518,7 +520,9 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
   .entry { grid-template-columns: 1fr; }
   .when { order: -1; margin-bottom: 0.2rem; font-size: 1.1rem; }
   .block > h2 { font-size: 2rem; }
-  .sheet-facts > div { grid-template-columns: 5.5rem minmax(0, 1fr); padding: 0.75rem 1rem; column-gap: 0.6rem; }
+  .sheet-facts, .sheet-personal { grid-template-columns: 1fr; }
+  .sheet-facts > div { padding: 0.75rem 1rem; border-right: 0; }
+  .sheet-facts > div + div { border-top: 1.5px solid var(--olive); }
   .thumbs { grid-template-columns: repeat(2, 1fr); }
 }
 
