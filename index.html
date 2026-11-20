@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hanif Fabianto Priyodianugrah | Portofolio</title>
+  <meta name="description" content="Portofolio Hanif Fabianto Priyodianugrah, mahasiswa Teknik Industri UMM yang mendalami Data Analytics dan Machine Learning, lengkap dengan bukti tiap proyek dan pengalaman.">
+  <meta property="og:title" content="Hanif Fabianto Priyodianugrah | Portofolio">
+  <meta property="og:description" content="Proyek, pengalaman, dan sertifikasi di bidang Data Analytics dan Teknik Industri, lengkap dengan bukti.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <meta name="theme-color" content="#2A2C31">
+  <script>document.documentElement.className = "js";</script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip" href="#konten">Lewati ke konten</a>
+
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#atas">Hanif Fabianto</a>
+      <nav id="nav" aria-label="Bagian halaman"></nav>
+      <a class="cv-link" id="cv-top" href="#">Unduh CV</a>
+    </div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="konten">
+    <div id="edit-banner" class="edit-banner" hidden>
+      Mode edit: kotak putus-putus menandai folder bukti yang masih kosong. Hapus <code>?edit</code> dari alamat untuk tampilan publik.
+    </div>
+
+    <section class="sheet" id="atas" aria-labelledby="nama">
+      <div class="sheet-main">
+        <h1 id="nama"></h1>
+        <p class="tagline" id="tagline"></p>
+        <p class="summary" id="summary"></p>
+        <ul class="contacts" id="contacts"></ul>
+      </div>
+      <dl class="sheet-facts" id="facts"></dl>
+    </section>
+
+    <div id="sections"></div>
+
+    <noscript>
+      <p class="noscript">Halaman ini membutuhkan JavaScript untuk menampilkan isi portofolio.</p>
+    </noscript>
+  </main>
+
+  <footer class="footer">
+    <p><span id="year"></span> Hanif Fabianto Priyodianugrah. Situs statis, dihosting gratis di GitHub Pages.</p>
+  </footer>
+
+  <dialog id="lightbox" aria-label="Penampil bukti">
+    <figure>
+      <img id="lb-img" alt="">
+      <figcaption id="lb-cap"></figcaption>
+    </figure>
+    <div class="lb-controls">
+      <button type="button" id="lb-prev" aria-label="Bukti sebelumnya">Sebelumnya</button>
+      <span id="lb-count" aria-live="polite"></span>
+      <button type="button" id="lb-next" aria-label="Bukti berikutnya">Berikutnya</button>
+      <button type="button" id="lb-close" aria-label="Tutup penampil">Tutup</button>
+    </div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
