@@ -37,20 +37,6 @@ window.PORTFOLIO = {
 
   sections: [
     {
-      id: "keahlian",
-      title: "Keahlian",
-      type: "skills",
-      groups: [
-        {
-          name: "Data dan machine learning",
-          items: ["Python", "Data Analytics", "EDA", "Machine Learning", "MatLab", "MySQL", "Google Colab"]
-        },
-        { name: "Teknik dan desain", items: ["AutoCAD", "Canva"] },
-        { name: "Pengembangan web", items: ["HTML CSS", "Visual Studio Code"] },
-        { name: "Perkantoran", items: ["Microsoft Word", "Microsoft Excel", "Microsoft Power Point"] }
-      ]
-    },
-    {
       id: "proyek",
       title: "Proyek",
       entries: [
@@ -252,6 +238,19 @@ window.PORTFOLIO = {
       ]
     },
 
-
+    {
+      id: "keahlian",
+      title: "Keahlian",
+      type: "skills",
+      groups: [
+        {
+          name: "Data dan machine learning",
+          items: ["Python", "Data Analytics", "EDA", "Machine Learning", "MatLab", "MySQL", "Google Colab"]
+        },
+        { name: "Teknik dan desain", items: ["AutoCAD", "Canva"] },
+        { name: "Pengembangan web", items: ["HTML CSS", "Visual Studio Code"] },
+        { name: "Perkantoran", items: ["Microsoft Word", "Microsoft Excel", "Microsoft Power Point"] }
+      ]
+    }
   ]
 };
