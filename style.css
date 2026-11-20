@@ -197,6 +197,27 @@ main {
 }
 .contacts a:hover { background: var(--ink); color: var(--surface); }
 
+.sheet-side {
+  display: flex;
+  flex-direction: column;
+  background: var(--slate);
+}
+.portrait { margin: 0; border-bottom: 2px solid var(--ink); background: var(--ink); }
+.portrait[hidden] { display: none; }
+.portrait img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+.empty-portrait {
+  padding: 1.25rem 1.1rem;
+  border: 0;
+  border-bottom: 2px dashed var(--halo);
+  color: var(--halo);
+  font-size: 0.9rem;
+}
+.sheet-side .sheet-facts { flex: 1; }
 .sheet-facts {
   margin: 0;
   display: flex;
@@ -450,6 +471,7 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
 @media (max-width: 860px) {
   .sheet { grid-template-columns: 1fr; }
   .sheet-main { border-right: 0; border-bottom: 2px solid var(--ink); padding: 1.5rem 1.25rem; }
+  .portrait img { aspect-ratio: 4 / 3; }
   .sheet-facts { display: grid; grid-template-columns: 1fr 1fr; }
   .sheet-facts > div { border-right: 1.5px solid var(--olive); }
   .sheet-facts > div:nth-child(2n) { border-right: 0; }
@@ -485,7 +507,7 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
 .sheet-main > :nth-child(2) { animation-delay: 0.08s; }
 .sheet-main > :nth-child(3) { animation-delay: 0.16s; }
 .sheet-main > :nth-child(4) { animation-delay: 0.24s; }
-.sheet-facts { animation: fade 0.8s ease 0.3s both; }
+.sheet-side { animation: fade 0.8s ease 0.3s both; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
