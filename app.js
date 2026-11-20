@@ -70,6 +70,25 @@
 
   if (EDIT) document.getElementById("edit-banner").hidden = false;
 
+  // Foto profil: simpan sebagai images/profil/foto.jpg (atau .png / .webp). Tanpa file, bagian ini tidak tampil.
+  Promise.all(EXTS.map(function (e) { return probe("images/profil/foto." + e); })).then(function (hits) {
+    var src = hits.filter(Boolean)[0];
+    if (!src) {
+      if (EDIT) {
+        var hint = document.getElementById("portrait");
+        hint.className = "portrait empty-portrait";
+        hint.innerHTML = "";
+        hint.appendChild(h("figcaption", { text: "Foto belum ada. Simpan sebagai images/profil/foto.jpg" }));
+        hint.hidden = false;
+      }
+      return;
+    }
+    var img = document.getElementById("portrait-img");
+    img.src = src;
+    img.alt = "Foto " + p.name;
+    document.getElementById("portrait").hidden = false;
+  });
+
   /* ---------- penampil bukti ---------- */
   var dlg = document.getElementById("lightbox");
   var lbImg = document.getElementById("lb-img");
