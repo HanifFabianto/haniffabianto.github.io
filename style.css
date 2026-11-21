@@ -271,7 +271,7 @@ main {
   font-size: 0.9rem;
   font-weight: 500;
   color: var(--ink);
-  background: var(--surface);
+  background: #B1AE9A;          /* sama dengan baris Prodi dkk; ink 6,3:1 */
 }
 
 /* ---------- Bagian ---------- */
@@ -402,6 +402,24 @@ main {
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 0.75rem;
 }
+
+/* Foto di samping teks (desktop dan tablet): teks di kiri, foto di kanan */
+.entry > .when + div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: repeat(6, auto) 1fr;
+  column-gap: 2rem;
+  align-items: start;
+}
+.entry > .when + div > :not(.evidence) { grid-column: 1; }
+.entry > .when + div > .evidence {
+  grid-column: 2;
+  grid-row: 1 / 8;
+  margin-top: 0.3rem;
+}
+.evidence:empty { display: none; }
+.evidence .thumbs { grid-template-columns: 200px; }
+.evidence:has(.thumb:nth-child(2)) .thumbs { grid-template-columns: repeat(2, 150px); }
 .thumb {
   appearance: none;
   padding: 0;
@@ -533,7 +551,10 @@ dialog figcaption { padding: 0.7rem 1rem 0; font-weight: 500; }
   .sheet-facts > div + div { border-top: 1.5px solid var(--ink); }
   .sheet-personal > div + div { border-top-color: rgba(247, 246, 242, 0.28); }
   .sheet-side { width: 100%; }
-  .thumbs { grid-template-columns: repeat(2, 1fr); }
+  .entry > .when + div { display: block; }
+  .entry > .when + div > .evidence { margin-top: 1.2rem; }
+  .evidence .thumbs,
+  .evidence:has(.thumb:nth-child(2)) .thumbs { grid-template-columns: repeat(2, 1fr); }
 }
 
 /* ---------- Gerak ---------- */
